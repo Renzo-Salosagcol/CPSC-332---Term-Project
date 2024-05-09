@@ -1,0 +1,30 @@
+.main-body {
+  background-color: blue;
+  color: orange;
+}
+
+.main-greeting {
+  font-size: 25px;
+  text-align: center;
+  margin-top: 25%;
+}
+
+.main-button {
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border-color: orange;
+  color: orange;
+  background-color: blue;
+  box-shadow: none;
+}
+
+.main-button:hover{
+  cursor: pointer;
+}
+
+.main-button:active {
+  background-color: white;
+  border-color: black;
+  color: black;
+}
