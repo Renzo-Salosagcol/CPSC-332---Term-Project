@@ -4,9 +4,9 @@ if(isset($_POST['ssn'])){
     // Database connection function
     function connectDB() {
         $servername = "mariadb";
-        $username = "cs332e3";
-        $password = "BUDGPa9a";
-        $dbname = "cs332e3";
+        $username = "USERNAME";
+        $password = "PASSWORD";
+        $dbname = "DBNAME";
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
