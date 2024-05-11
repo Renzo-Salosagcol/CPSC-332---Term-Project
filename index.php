@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>CPSC 332 - Term Project</title>
-    <link rel="stylesheet" href="/styles/main-page-styles.css">
+    <link rel="stylesheet" href="./styles/main-page-styles.css">
   </head>
   <body class="main-body">
     <div class="main-greeting">
