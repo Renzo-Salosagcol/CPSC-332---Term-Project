@@ -1,12 +1,12 @@
 <?php
-if(isset($_POST['ssn'])){
+if(isset($_POST['ssn']) && (!empty($_POST['ssn']))){
 
     // Database connection function
     function connectDB() {
         $servername = "mariadb";
-        $username = "USERNAME";
-        $password = "PASSWORD";
-        $dbname = "DBNAME";
+        $username = "cs332e3";
+        $password = "BUDGPa9a";
+        $dbname = "cs332e3";
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -25,6 +25,7 @@ if(isset($_POST['ssn'])){
         // Perform query
         $result = $conn->query($sql);
 
+        if($result)
         // Check for errors
         if (!$result) {
             die("Query failed: " . $conn->error);
@@ -38,6 +39,12 @@ if(isset($_POST['ssn'])){
 
     // Get SSN from POST data
     $ssn = $_POST['ssn'];
+
+    if($ssn <= 0) {
+        echo "<p>Query Result:</p>";
+        echo "<p>Please enter a valid SSN.</p>";
+        return;
+    }
 
     // Your SQL query
     $sql = "SELECT c.Title AS CourseTitle,
@@ -55,14 +62,17 @@ if(isset($_POST['ssn'])){
     // Display the SQL query result
     if ($result->num_rows > 0) {
         // Output data of each row
-        echo "<p>SQL Query:</p>";
+        echo "<p>Query Result:</p>";
         echo "<ul>";
         while($row = $result->fetch_assoc()) {
-            echo "<li>Title: " . $row["title"]. " - Classroom: " . $row["classroom"]. " - Meeting Day: " . $row["meeting_day"]. " - Time: " . $row["time"]. "</li>";
+            echo "<li>Title: " . $row["CourseTitle"]. " - Classroom: " . $row["Classroom"]. " - Meeting Day: " . $row["MeetingDays"]. " - Time: " . $row["StartTime"]. " - " . $row["EndTime"] . "</li>";
         }
         echo "</ul>";
     } else {
         echo "<p>No classes found for the professor's SSN.</p>";
     }
+} else {
+    echo "<p>Query Result:</p>";
+    echo "<p>Please enter a valid SSN.</p>";
 }
 ?>
