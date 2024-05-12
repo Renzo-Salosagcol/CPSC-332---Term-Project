@@ -9,10 +9,8 @@ if(isset($_POST['ssn']) && (!empty($_POST['ssn']))){
         $password = "BUDGPa9a";
         $dbname = "cs332e3";
 
-        // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
@@ -24,16 +22,12 @@ if(isset($_POST['ssn']) && (!empty($_POST['ssn']))){
     function performQuery($sql) {
         $conn = connectDB();
 
-        // Perform query
         $result = $conn->query($sql);
-
-        if($result)
-        // Check for errors
+        
         if (!$result) {
             die("Query failed: " . $conn->error);
         }
 
-        // Close connection
         $conn->close();
 
         return $result;
