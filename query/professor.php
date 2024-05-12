@@ -1,7 +1,8 @@
 <?php
 if(isset($_POST['ssn']) && (!empty($_POST['ssn']))){
 
-    // Database connection function
+    // ======== START FUNCTION DECLARATIONS ========
+    // Connects to the database using Matt's credentials
     function connectDB() {
         $servername = "mariadb";
         $username = "cs332e3";
@@ -18,7 +19,8 @@ if(isset($_POST['ssn']) && (!empty($_POST['ssn']))){
         return $conn;
     }
 
-    // Query function
+    // A function that opens the database, performs a query given, and closes.
+    // Returns a result or an error.
     function performQuery($sql) {
         $conn = connectDB();
 
@@ -37,16 +39,21 @@ if(isset($_POST['ssn']) && (!empty($_POST['ssn']))){
         return $result;
     }
 
+    // ======== END FUNCTION DECLARATIONS ========
+    // ===========================================
+    // ============== SCRIPT  START ==============
+
     // Get SSN from POST data
     $ssn = $_POST['ssn'];
 
+    // If SSN is equal to or less than zero, return.
     if($ssn <= 0) {
         echo "<p>Query Result:</p>";
         echo "<p>Please enter a valid SSN.</p>";
         return;
     }
 
-    // Your SQL query
+    // Get class titles, rooms, meeting days, start/end time, an courses associated with professor.
     $sql = "SELECT c.Title AS CourseTitle,
     s.Classroom,
     s.MeetingDays,
@@ -56,12 +63,10 @@ if(isset($_POST['ssn']) && (!empty($_POST['ssn']))){
     JOIN COURSES c ON s.CourseNumber = c.CourseNumber
     WHERE s.ProfessorSSN = " . $ssn;
 
-    // Perform the query
+    // Perform the query and result result. Return results in an unordered list otherwise, return "no classes found"
     $result = performQuery($sql);
 
-    // Display the SQL query result
     if ($result->num_rows > 0) {
-        // Output data of each row
         echo "<p>Query Result:</p>";
         echo "<ul>";
         while($row = $result->fetch_assoc()) {
