@@ -1,107 +1,107 @@
 -- create
 CREATE TABLE PROFESSORS (
-  SSN VARCHAR(8) primary key,
-  NAME VARCHAR(255),
-  STADDRESS VARCHAR(20),
-  CITY VARCHAR(20),
-  ZIPCODE CHAR(5),
-  TELEPHONE VARCHAR(10),
-  SEX VARCHAR(2),
-  TITLE VARCHAR(255),
-  SALARY INTEGER,
-  COLLEGE_DEG VARCHAR(255)
+  SSN VARCHAR(11) PRIMARY KEY,
+  ProfessorName VARCHAR(255),
+  ProfessorAddress VARCHAR(20),
+  City VARCHAR(20),
+  Zipcode CHAR(5),
+  Telephone VARCHAR(10),
+  Sex VARCHAR(2),
+  Title VARCHAR(255),
+  Salary INTEGER,
+  CollegeDegree VARCHAR(255)
 );
 
 CREATE TABLE DEPARTMENTS (
-  DEPARTMENT_NUM INT PRIMARY KEY,
-  NAME VARCHAR(255),
-  TELEPHONE VARCHAR(10),
-  OFFICE_LOC VARCHAR(255),
-  ChairpersonSSN INT,
+  DepartmentNumber INT PRIMARY KEY,
+  DepartmentName VARCHAR(255),
+  Telephone VARCHAR(10),
+  OfficeLocation VARCHAR(255),
+  ChairpersonSSN VARCHAR(11),
   FOREIGN KEY (ChairpersonSSN) REFERENCES PROFESSORS(SSN)
 );
 
-CREATE TABLE Courses (
+CREATE TABLE COURSES (
     CourseNumber INT PRIMARY KEY,
     Title VARCHAR(100),
     Textbook VARCHAR(255),
-    UNITS INT,
-    DEPT_NUM INT,
-    FOREIGN KEY (DEPT_NUM) REFERENCES DEPARTMENTS(DEPARTMENT_NUM)
+    Units INT,
+    DepartmentNumber INT,
+    FOREIGN KEY (DepartmentNumber) REFERENCES DEPARTMENTS(DepartmentNumber)
 );
 
-CREATE TABLE Sections (
+CREATE TABLE SECTIONS (
     SectionNumber INT UNIQUE,
     Classroom VARCHAR(100),
     Seats INT,
     MeetingDays VARCHAR(20),
     StartTime TIME,
     EndTime TIME,
-    ProfessorSSN VARCHAR(8),
+    ProfessorSSN VARCHAR(11),
     CourseNumber INT,
     PRIMARY KEY (SectionNumber, CourseNumber),
-    FOREIGN KEY (CourseNumber) REFERENCES Courses(CourseNumber),
+    FOREIGN KEY (CourseNumber) REFERENCES COURSES(CourseNumber),
     FOREIGN KEY (ProfessorSSN) REFERENCES PROFESSORS(SSN)
 );
 
 CREATE TABLE STUDENT (
   CWID INT PRIMARY KEY ,
-  SNAME VARCHAR(255), 
-  SADDRESS VARCHAR(255),
-  STELEPHONE VARCHAR(20),
-  MAJORDEPT INT,
-  MINORDEPT INT,
-  FOREIGN KEY (MAJORDEPT) REFERENCES DEPARTMENTS(DEPARTMENT_NUM),
-  FOREIGN KEY (MINORDEPT) REFERENCES DEPARTMENTS(DEPARTMENT_NUM)
+  StudentName VARCHAR(255), 
+  StudentAddress VARCHAR(255),
+  StudentTelephone VARCHAR(20),
+  MajorDepartment INT,
+  MinorDepartment INT,
+  FOREIGN KEY (MajorDepartment) REFERENCES DEPARTMENTS(DepartmentNumber),
+  FOREIGN KEY (MinorDepartment) REFERENCES DEPARTMENTS(DepartmentNumber)
 );
 
 CREATE TABLE ENROLLMENT_RECORDS (
   CWID INT,
   SectionNumber INT,
   CourseNumber INT,
-  GRADE INT,
+  Grade INT,
   PRIMARY KEY (CWID, SectionNumber, CourseNumber),
-  FOREIGN KEY (CWID) REFERENCES Student(CWID),
-  FOREIGN KEY (SectionNumber) REFERENCES Sections(SectionNumber),
-  FOREIGN KEY (CourseNumber) REFERENCES Courses(CourseNumber)
+  FOREIGN KEY (CWID) REFERENCES STUDENT(CWID),
+  FOREIGN KEY (SectionNumber) REFERENCES SECTIONS(SectionNumber),
+  FOREIGN KEY (CourseNumber) REFERENCES COURSES(CourseNumber)
 );
 
 --below are queries for testing
--- insert 8 students
-INSERT INTO STUDENT (CWID, SNAME, SADDRESS, STELEPHONE, MAJORDEPT, MINORDEPT) 
-VALUES
-(0001, 'John Doe', '123 Fake St, Faketown, USA', '555-1234', 101, 102),
-(0002, 'Jane Smith', '456 Mock Ave, Mockville, USA', '555-5678', 102, 101),
-(0003, 'Alice Johnson', '789 Pretend Rd, Fantasyland, USA', '555-9012', 101, NULL),
-(0004, 'Bob Brown', '321 Imaginary Blvd, Dreamland, USA', '555-3456', 103, 101),
-(0005, 'Emily Davis', '654 Fictitious Ln, Makebelieve City, USA', '555-7890', 102, NULL),
-(0006, 'Michael Wilson', '987 Unreal Ave, Wonderland, USA', '555-2345', 104, 102),
-(0007, 'Sarah Taylor', '246 Illusion St, Neverland, USA', '555-6789', 103, NULL),
-(0008, 'David Martinez', '135 Mirage Rd, Enchanted Forest, USA', '555-0123', 104, NULL);
-
 -- insert 3 professors
-INSERT INTO PROFESSORS (SSN, NAME, STADDRESS, CITY, ZIPCODE, TELEPHONE, SEX, TITLE, SALARY, COLLEGE_DEG) 
+INSERT INTO PROFESSORS (SSN, ProfessorName, ProfessorAddress, City, Zipcode, Telephone, Sex, Title, Salary, CollegeDegree) 
 VALUES
 ('123-45-6789', 'Dr. James Smith', '123 Main St', 'Anytown', '12345', '555-1234', 'M', 'Professor', 120000, 'Ph.D. Computer Science'),
 ('987-65-4321', 'Dr. Jennifer Johnson', '456 Elm St', 'Othertown', '54321', '555-5678', 'F', 'Associate Professor', 80000, 'Ph.D. Physics'),
 ('246-81-3579', 'Dr. Michael Williams', '789 Oak St', 'Somewhere', '67890', '555-9012', 'M', 'Assistant Professor', 70000, 'Ph.D. Biology');
 
 --insert 2 departments
-INSERT INTO DEPARTMENTS (DEPARTMENT_NUM, NAME, TELEPHONE, OFFICE_LOC, ChairpersonSSN) 
+INSERT INTO DEPARTMENTS (DepartmentNumber, DepartmentName, Telephone, OfficeLocation, ChairpersonSSN) 
 VALUES
-(201, 'Computer Science Department', '101', 'Smith Hall, Room 101', 123456789),
-(202, 'Physics Department', '102', 'Johnson Building, Room 202', 987654321);
+(101, 'Computer Science Department', '101', 'Smith Hall, Room 101', '123-45-6789'),
+(102, 'Physics Department', '102', 'Johnson Building, Room 202', '987-65-4321');
+
+-- insert 8 students
+INSERT INTO STUDENT (CWID, StudentName, StudentAddress, StudentTelephone, MajorDepartment, MinorDepartment) 
+VALUES
+(0001, 'John Doe', '123 Fake St, Faketown, USA', '555-1234', 101, 102),
+(0002, 'Jane Smith', '456 Mock Ave, Mockville, USA', '555-5678', 101, 102),
+(0003, 'Alice Johnson', '789 Pretend Rd, Fantasyland, USA', '555-9012', 101, NULL),
+(0004, 'Bob Brown', '321 Imaginary Blvd, Dreamland, USA', '555-3456', 102, 101),
+(0005, 'Emily Davis', '654 Fictitious Ln, Makebelieve City, USA', '555-7890', 102, NULL),
+(0006, 'Michael Wilson', '987 Unreal Ave, Wonderland, USA', '555-2345', 102, 101),
+(0007, 'Sarah Taylor', '246 Illusion St, Neverland, USA', '555-6789', 101, NULL),
+(0008, 'David Martinez', '135 Mirage Rd, Enchanted Forest, USA', '555-0123', 102, NULL);
 
 --insert 4 courses
-INSERT INTO Courses (CourseNumber, Title, Textbook, UNITS, DEPT_NUM) 
+INSERT INTO COURSES (CourseNumber, Title, Textbook, Units, DepartmentNumber) 
 VALUES
-(101, 'Introduction to Computer Science', 'Computer Science: An Overview', 3, 201),
-(102, 'Data Structures and Algorithms', 'Introduction to Algorithms', 4, 201),
-(103, 'Introduction to Physics', 'Physics for Beginners', 3, 202),
-(104, 'Quantum Mechanics', 'Principles of Quantum Mechanics', 4, 202);
+(101, 'Introduction to Computer Science', 'Computer Science: An Overview', 3, 101),
+(102, 'Data Structures and Algorithms', 'Introduction to Algorithms', 4, 101),
+(103, 'Introduction to Physics', 'Physics for Beginners', 3, 102),
+(104, 'Quantum Mechanics', 'Principles of Quantum Mechanics', 4, 102);
 
 --insert 6 sections
-INSERT INTO Sections (SectionNumber, Classroom, Seats, MeetingDays, StartTime, EndTime, ProfessorSSN, CourseNumber) 
+INSERT INTO SECTIONS (SectionNumber, Classroom, Seats, MeetingDays, StartTime, EndTime, ProfessorSSN, CourseNumber) 
 VALUES
 (1, 'Room 501', 30, 'MWF', '08:00:00', '09:00:00', '123-45-6789', 101),
 (2, 'Room 502', 25, 'TTH', '10:00:00', '11:30:00', '123-45-6789', 102),
@@ -111,7 +111,7 @@ VALUES
 (6, 'Room 506', 30, 'MW', '15:00:00', '16:30:00', '987-65-4321', 103);
 
 --insert 20 enrollment records
-INSERT INTO ENROLLMENT_RECORDS (CWID, SectionNumber, CourseNumber, GRADE) 
+INSERT INTO ENROLLMENT_RECORDS (CWID, SectionNumber, CourseNumber, Grade) 
 VALUES
 (0001, 1, 101, 85),
 (0002, 2, 102, 78),
