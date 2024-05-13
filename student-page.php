@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Student's page</title>
-    <link rel="stylesheet" href="student-page-styles.css">
+    <link rel="stylesheet" href="./styles/student-page-styles.css">
   </head>
   <body class="student-body">
     <header>
