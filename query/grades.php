@@ -59,10 +59,10 @@ if(isset($_POST['CourseNumber']) && isset($_POST['SectionNumber']) && (!empty($_
             FROM (
                 SELECT
                     CASE
-                        WHEN GRADE >= 90 THEN 'A'
-                        WHEN GRADE >= 80 THEN 'B'
-                        WHEN GRADE >= 70 THEN 'C'
-                        WHEN GRADE >= 60 THEN 'D'
+                        WHEN Grade >= 90 THEN 'A'
+                        WHEN Grade >= 80 THEN 'B'
+                        WHEN Grade >= 70 THEN 'C'
+                        WHEN Grade >= 60 THEN 'D'
                         ELSE 'F'
                     END AS Grade
                 FROM ENROLLMENT_RECORDS

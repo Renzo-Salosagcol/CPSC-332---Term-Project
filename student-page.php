@@ -6,7 +6,7 @@
   </head>
   <body class="student-body">
     <header>
-      <a href="index.html"><button>Back</button></a>
+      <a href="index.php"><button>Back</button></a>
     </header>
     <div>
       <div class="section-1">
