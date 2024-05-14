@@ -14,7 +14,7 @@
   <div>
     <div class="section-1">
       <p>Want a list of titles, classrooms, meeting days, and time of a professor's classes?</p>
-      <p>Please input their social security number: <input type="number" id="professor-ssn"></p>
+      <p>Please input their social security number: <input type="text" id="professor-ssn"></p>
       <button id="ssn-button">Show List</button>
       <script>
         $(document).ready(function () {
@@ -37,8 +37,8 @@
     <div class="section-2">
       <p>Want a count of students and get each distinct grade?</p>
       <p>Please input the following:</p>
-      <p>Course Number: <input type="number" id="course-num"></p>
-      <p>Section Number: <input type="number" id="section-num"></p>
+      <p>Course Number: <input type="text" id="course-num"></p>
+      <p>Section Number: <input type="text" id="section-num"></p>
       <button id="grades-button">Show Results</button>
       <script>
         $(document).ready(function () {

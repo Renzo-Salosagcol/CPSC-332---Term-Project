@@ -1,41 +1,7 @@
 <?php
+require 'db-connect.php';
+
 if(isset($_POST['CourseNumber']) && isset($_POST['SectionNumber']) && (!empty($_POST['CourseNumber'])) && (!empty($_POST['SectionNumber']) )){
-
-    // ======== START FUNCTION DECLARATIONS ========
-    // Connects to the database using Matt's credentials
-    function connectDB() {
-        $servername = "mariadb";
-        $username = "cs332e3";
-        $password = "BUDGPa9a";
-        $dbname = "cs332e3";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        return $conn;
-    }
-
-    // A function that opens the database, performs a query given, and closes.
-    // Returns a result or an error.
-    function performQuery($sql) {
-        $conn = connectDB();
-
-        $result = $conn->query($sql);
-        
-        if (!$result) {
-            die("Query failed: " . $conn->error);
-        }
-
-        $conn->close();
-
-        return $result;
-    }
-
-    // ======== END FUNCTION DECLARATIONS ========
-    // ===========================================
-    // ============== SCRIPT  START ==============
 
     // Get POST data
     $courseNum = $_POST['CourseNumber'];
@@ -52,22 +18,30 @@ if(isset($_POST['CourseNumber']) && isset($_POST['SectionNumber']) && (!empty($_
         return;
     }
 
-    // THIS MIGHT NOT WORK, NEEDS TO BE CHECKED WITH DATA!
+    // Query
     $sql = "SELECT
                 Grade,
                 COUNT(*) AS Count
             FROM (
                 SELECT
                     CASE
-                        WHEN Grade >= 90 THEN 'A'
-                        WHEN Grade >= 80 THEN 'B'
-                        WHEN Grade >= 70 THEN 'C'
-                        WHEN Grade >= 60 THEN 'D'
+                        WHEN Grade >= 97 THEN 'A+'
+                        WHEN Grade >= 93 THEN 'A'
+                        WHEN Grade >= 90 THEN 'A-'
+                        WHEN Grade >= 87 THEN 'B+'
+                        WHEN Grade >= 83 THEN 'B'
+                        WHEN Grade >= 80 THEN 'B-'
+                        WHEN Grade >= 77 THEN 'C+'
+                        WHEN Grade >= 73 THEN 'C'
+                        WHEN Grade >= 70 THEN 'C-'
+                        WHEN Grade >= 67 THEN 'D+'
+                        WHEN Grade >= 63 THEN 'D'
+                        WHEN Grade >= 60 THEN 'D-'
                         ELSE 'F'
                     END AS Grade
                 FROM ENROLLMENT_RECORDS
-                WHERE CourseNumber = " . $courseNum . "
-                AND SectionNumber = " . $sectionNum . "
+                WHERE CourseNumber = $courseNum
+                AND SectionNumber = $sectionNum
             ) AS GradeGroups
             GROUP BY Grade
             ORDER BY FIELD(Grade, 'A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F')";
