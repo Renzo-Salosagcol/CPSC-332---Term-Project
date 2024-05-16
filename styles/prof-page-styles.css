@@ -49,3 +49,66 @@ header {
   margin-right: auto;
   text-align: center;
 }
+.prof-body{
+  background-image: url('https://www.fullerton.edu/it/_resources/_resources/fall22zoom_01.png');
+  background-repeat:no-repeat;
+  background-size: cover;
+  }
+  
+  header {
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+  
+  .main-button {
+    position: fixed;
+    top: 0;
+    font-size: 20px;
+    font-family: 'Comic Sans MS';
+    padding: 15px 50px;
+    border-radius: 30px;
+    border-width: 6px;
+    border-color: orange;
+    color: orange;
+    background-color: #0000ff;
+    box-shadow: none;
+  }
+  
+  .main-button:hover {
+    cursor: pointer;
+  }
+  
+  .main-button:active {
+    background-color: white;
+    border-color: black;
+    color: black;
+  }
+  .section-1 {
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+    border-radius: 30px;
+    background-color: lightsalmon;
+    width: 400px;
+    margin-top: 20%;
+  }
+  
+  .section-2 {
+    border-width:2px;
+    border-style:solid;
+    border-color:black;
+    border-radius: 30px;
+    background-color: #BDBEBF;
+    width: 400px;
+    display: block;
+  }
+  
+  .section-1,
+  .section-2 {
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
