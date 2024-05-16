@@ -50,11 +50,19 @@ if(isset($_POST['CourseNumber']) && isset($_POST['SectionNumber']) && (!empty($_
 
     if ($result->num_rows > 0) {
         echo "<p>Query Result:</p>";
-        echo "<ul>";
+        echo "<table>";
+        echo "<tr><th>Grade</th><th>Count</th></tr>";
+
         while($row = $result->fetch_assoc()) {
-            echo "<li>" . $row["Grade"] . ": " . $row["Count"] . "</li>";
+            $grade = htmlspecialchars($row["Grade"]);
+            $count = htmlspecialchars($row["Count"]);
+
+            echo "<tr>";
+            echo "<td>$grade</td>";
+            echo "<td>$count</td>";
+            echo "</tr>";
         }
-        echo "</ul>";
+        echo "</table>";
     } else {
         echo "<p>This course and/or section number does not exist</p>";
     }
