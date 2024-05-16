@@ -32,11 +32,22 @@ if(isset($_POST['CWID']) && (!empty($_POST['CWID']))){
 
     if ($result->num_rows > 0) {
         echo "<p>Query Result:</p>";
-        echo "<ul>";
+        echo "<table>";
+        echo "<tr><th>Course Title</th><th>Section Number</th><th>Grade</th></tr>";
+
         while($row = $result->fetch_assoc()) {
-            echo "<li>Course: " . $row["CourseTitle"]. ", Section: " . $row["SectionNumber"]. " current grade: " . $row["Grade"] . "</li>";
+            $courseTitle = htmlspecialchars($row["CourseTitle"]);
+            $sectionNumber = htmlspecialchars($row["SectionNumber"]);
+            $grade = htmlspecialchars($row["Grade"]);
+
+            echo "<tr>";
+            echo "<td>$courseTitle</td>";
+            echo "<td>$sectionNumber</td>";
+            echo "<td>$grade</td>";
+            echo "</tr>";
         }
-        echo "</ul>";
+
+        echo "</table>";
     } else {
         echo "<p>This student is not enrolled in any courses.</p>";
     }
