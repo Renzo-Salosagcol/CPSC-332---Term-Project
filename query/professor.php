@@ -29,11 +29,25 @@ if(isset($_POST['ssn']) && (!empty($_POST['ssn']))){
 
     if ($result->num_rows > 0) {
         echo "<p>Query Result:</p>";
-        echo "<ul>";
+        echo "<table>";
+        echo "<tr><th>Course Title</th><th>Classroom</th><th>Meeting Day</th><th>Start Time</th><th>End Time</th></tr>";
+
         while($row = $result->fetch_assoc()) {
-            echo "<li>Title: " . $row["CourseTitle"]. " - Classroom: " . $row["Classroom"]. " - Meeting Day: " . $row["MeetingDays"]. " - Time: " . $row["StartTime"]. " - " . $row["EndTime"] . "</li>";
+            $courseTitle = htmlspecialchars($row["CourseTitle"]);
+            $classroom = htmlspecialchars($row["Classroom"]);
+            $meetingDays = htmlspecialchars($row["MeetingDays"]);
+            $startTime = htmlspecialchars($row["StartTime"]);
+            $endTime = htmlspecialchars($row["EndTime"]);
+
+            echo "<tr>";
+            echo "<td>$courseTitle</td>";
+            echo "<td>$classroom</td>";
+            echo "<td>$meetingDays</td>";
+            echo "<td>$startTime</td>";
+            echo "<td>$endTime</td>";
+            echo "</tr>";
         }
-        echo "</ul>";
+        echo "</table>";
     } else {
         echo "<p>No classes found for the professor's SSN.</p>";
     }
