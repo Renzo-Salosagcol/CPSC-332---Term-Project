@@ -1,7 +1,6 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
   font-size: 18px;
   text-align: left;
 }
@@ -90,7 +89,7 @@ header {
   border-color:black;
   border-radius: 30px;
   background-color: #F27830;
-  width: 400px;
+  width: 800px;
   margin-top: 20%;
 }
   
@@ -100,7 +99,7 @@ header {
   border-color:black;
   border-radius: 30px;
   background-color: #549D9D;
-  width: 400px;
+  width: 800px;
   display: block;
   }
   
