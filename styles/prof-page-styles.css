@@ -88,7 +88,6 @@ header {
     border-color:black;
     border-radius: 30px;
     background-color: lightsalmon;
-    width: 800px;
     margin-top: 20%;
   }
   
@@ -98,7 +97,6 @@ header {
     border-color:black;
     border-radius: 30px;
     background-color: #BDBEBF;
-    width: 800px;
     display: block;
   }
   
@@ -115,4 +113,22 @@ header {
   .classes-query {
     width: 90%;
     margin: 0 auto;
+  }
+
+  @media(max-width: 750px) {
+    .section-1, .section-2 {
+        width: 500px;
+    }
+  }
+  
+  @media (min-width: 751px) and (max-width: 999px) {
+    .section-1, .section-2 {
+      width: 650px;
+  }
+  }
+  
+  @media(min-width: 1000px) {
+    .section-1, .section-2 {
+      width: 800px;
+  }
   }
